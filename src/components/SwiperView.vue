@@ -7,12 +7,16 @@
         <p>우리는 단지 자동차 제조 업체에만 머물지 않습니다.<br>
             이를 넘어, 모두에게 영감을 주는 시간과 공간을 만드는 사람들입니다.</p>
     </div>
-    <div class="btnWrap">
-        <button class="slick-arrow btnPrev">prev</button>
-        <button class="slick-arrow btnNext">next</button>
-    </div>
+    
+    
   </div>
   <div class="swiperView">
+    <div class="container">
+        <div class="btnWrap">
+        <button class="slick-arrow btnPrev prev">prev</button>
+        <button class="slick-arrow btnNext next">next</button>
+    </div>
+  </div>
 
   <swiper            
             :modules="modules_03"
@@ -44,9 +48,11 @@ import "swiper/css";
 
 import "swiper/css/pagination";
 
+import "swiper/css/navigation";
+
 
 // import required modules
-import { Pagination } from "swiper";
+import { Pagination,Navigation } from "swiper";
 
 export default {
   props:["sData"],
@@ -56,7 +62,7 @@ export default {
   },
   setup() {
     return {
-      modules_03: [Pagination],
+      modules_03: [Pagination,Navigation  ],
        swiperOptions_03:{
         slidesPerView:1,
         spaceBetween:3,
@@ -77,9 +83,13 @@ export default {
 
         pagination:{
               type: "fraction"
-             },                    
-         }  
-        }; 
+             }, 
+        navigation:{
+          nextEl:'.btnWrap .next',
+          prevEl:'.btnWrap .prev',
+        },                           
+       }  
+      }; 
     }
 }
       
@@ -90,6 +100,7 @@ export default {
 
 
 .wrapSwiper{
+    height: 100vh;
     .title{
         font-family: 'Kia Signature', "맑은 고딕", "Malgun Gothic", 돋움, Dotum, sans-serif;
         color: #05141F;
@@ -111,22 +122,52 @@ export default {
             color:#848C91;
         }              
     }
-    .btnWrap{
-        display: flex;
-        justify-content: flex-end;      
+    
+    .swiperView{ 
+        position: relative;     
+        _background: skyblue;
+        .swiper-pagination{                
+                z-index: 99;
+                height: 100px;
+                position: absolute;              
+                top:0px;
+                font-family: 'Kia Signature';
+                font-weight: 700;
+                font-size: 25px;
+                color: #05141F;                
+                _background: pink;            
+            .swiper-pagination-current{        
+                font-size: 25px;
+            }
+            .swiper-pagination-total{                 
+                font-size: 12px;
+                color: #CDD0D2;
+
+            }
+        }
+        .btnWrap{    
+            z-index: 0;         
+            display: flex;
+            justify-content: flex-end; 
+              
         .slick-arrow{
             width:42px; height:42px; margin-left:12px;
             background-repeat:no-repeat; background-size:cover;
             overflow:hidden; text-indent:-9999px;
+            border-radius: 50px;
+            border: 0px;
+            
             :first-child { margin-left:0px; }       
-            &.btnPrev{background-image:url("../assets/arrow-prev.svg");}
-        &.btnNext{background-image:url("../assets/arrow-next.svg");} 
+        &.btnPrev{
+            background-image:url("../assets/arrow-prev.svg"); transition:0.3s; ;
+            &:hover{background-color:#000; cursor: pointer;}
+            }
+        &.btnNext{
+            background-image:url("../assets/arrow-next.svg"); transition:0.3s;;
+            &:hover{background-color:#000; cursor: pointer;}
+            } 
         }
-        
-     
-
     }
-    .swiperView{
         .sWrap{ 
             padding: 50px;          
             .simg{           
@@ -150,9 +191,12 @@ export default {
                 line-height: 24px;
                 color: #666666;
             }    
-         }
+         }        
+        
     }
-
+    
 }
+            
+
 
 </style>
