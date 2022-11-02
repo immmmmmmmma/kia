@@ -10,19 +10,13 @@
     
     
   </div>
-  <div class="swiperView">
-    <div class="container">
-        <div class="btnWrap">
-        <button class="slick-arrow btnPrev prev">prev</button>
-        <button class="slick-arrow btnNext next">next</button>
-    </div>
-  </div>
-
+  <div class="swiperView">  
   <swiper            
             :modules="modules_03"
             v-bind="swiperOptions_03" 
             class="mySwiper_03"
-          > 
+          >             
+
             <swiper-slide v-for="(item, i) in sData" :key="i" class="sWrap">
               <a :href="sData[i].href">
                     <div class="simg">                   
@@ -30,8 +24,14 @@
                     </div>
                     <h3>{{sData[i].title}}</h3>
                     <p>{{sData[i].subtitle}}</p>
-                  </a>
+              </a>
             </swiper-slide>
+          
+              <div class="btnWrap">
+                  <button class="slick-arrow btnPrev prev">prev</button>
+                  <button class="slick-arrow btnNext next">next</button>
+              </div>
+           
   </swiper>
 
   </div>
@@ -123,51 +123,60 @@ export default {
         }              
     }
     
-    .swiperView{ 
-        position: relative;     
-        _background: skyblue;
-        .swiper-pagination{                
-                z-index: 99;
-                height: 100px;
-                position: absolute;              
-                top:0px;
+    .swiper {        
+         display: flex;
+         justify-content: center;
+         position: relative;
+         margin-top: auto;         
+         _background: skyblue;
+          .swiper-pagination{
+               position: absolute;
+               top: 10px;
+               left: calc(50% - 25%);  
+                width: 100%;                
+                height: 50px;
+                
                 font-family: 'Kia Signature';
                 font-weight: 700;
                 font-size: 25px;
                 color: #05141F;                
-                _background: pink;            
-            .swiper-pagination-current{        
-                font-size: 25px;
+                _background: pink;             
+              .swiper-pagination-current{        
+                  font-size: 25px;
+              }
+              .swiper-pagination-total{                 
+                  font-size: 12px;
+                  color: #CDD0D2;
+              }          
             }
-            .swiper-pagination-total{                 
-                font-size: 12px;
-                color: #CDD0D2;
-
-            }
-        }
-        .btnWrap{    
-            z-index: 0;         
-            display: flex;
-            justify-content: flex-end; 
-              
-        .slick-arrow{
-            width:42px; height:42px; margin-left:12px;
-            background-repeat:no-repeat; background-size:cover;
-            overflow:hidden; text-indent:-9999px;
-            border-radius: 50px;
-            border: 0px;
-            
-            :first-child { margin-left:0px; }       
-        &.btnPrev{
-            background-image:url("../assets/arrow-prev.svg"); transition:0.3s; ;
-            &:hover{background-color:#000; cursor: pointer;}
-            }
-        &.btnNext{
-            background-image:url("../assets/arrow-next.svg"); transition:0.3s;;
-            &:hover{background-color:#000; cursor: pointer;}
-            } 
-        }
-    }
+        .btnWrap{
+                z-index: 99;
+                position: absolute;
+                top: 0px;   
+                width: 1320px;
+                margin: 0 auto;   
+                display: flex;
+                justify-content: flex-end;                 
+                  
+                .slick-arrow{
+                    width:42px; height:42px; margin-left:12px;
+                    background-repeat:no-repeat; background-size:cover;
+                    overflow:hidden; text-indent:-9999px;
+                    border-radius: 50px;
+                    border: 0px;
+                    
+                    :first-child { margin-left:0px; }       
+                &.btnPrev{
+                    background-image:url("../assets/arrow-prev.svg"); transition:0.3s; ;
+                    &:hover{background-color:#000; cursor: pointer;}
+                    }
+                &.btnNext{
+                    background-image:url("../assets/arrow-next.svg"); transition:0.3s;;
+                    &:hover{background-color:#000; cursor: pointer;}
+                    } 
+                }
+              }
+  
         .sWrap{ 
             padding: 50px;          
             .simg{           
@@ -195,7 +204,36 @@ export default {
         
     }
     
+     @media (max-width:767px){                 
+          .title{
+            padding: 0 16px ;
+            p{
+              line-height: 22px;
+              padding-bottom: 50px;
+              _background: pink;  
+            }
+            h4{        
+            padding-top: 25px;
+            font-size: 28px;
+            line-height: 35px; 
+            }       
+          }
+          .swiper {
+            .btnWrap{
+                display: flex;
+                justify-content: center;                         
+                width: 100%;
+                _background: pink;  
+              
+            }
+            .swiper-pagination{           
+               left: calc(50% - 25%);  
+           }
+          }
+          
+       }
 }
+
             
 
 
